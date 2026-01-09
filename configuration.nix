@@ -1,99 +1,38 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   config,
-  pkgs,
-  inputs,
   lib,
+  pkgs,
   ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-  boot.loader.systemd-boot.enable = lib.mkForce false;
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # For secure boot purposes.
-  #
-  # Remmeber this when installing on a new system.
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
+  # networking.hostName = "nixos"; # Define your hostname.
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
-  boot.kernelModules = [];
-  boot.extraModprobeConfig = ''
-    options snd-hda-intel power_save=0
-    options snd-hda-intel model=auto
-  '';
-  hardware.enableAllFirmware = true;
+  # Configure network connections interactively with nmcli or nmtui.
+  networking.networkmanager.enable = true;
 
-  security.polkit.enable = true;
+  # time.timeZone = "Europe/Amsterdam";
 
-  nix.optimise.automatic = true;
-  nix.optimise.dates = ["03:45"];
+  i18n.defaultLocale = "en_US.UTF-8";
 
-  qt.enable = true;
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  # Enabling polkit_gnome
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
-
-  hardware.graphics.enable = true;
-
-  services.xserver = {
-    enable = true;
-    exportConfiguration = true;
-    videoDrivers = ["amdgpu" "nvidia"];
-  };
-
-  # Loooking into dynamic boost also include maybe "amdgpu" as a kernel module
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
-
-    prime = {
-      nvidiaBusId = "PCI:1:0:0";
-      amdgpuBusId = "PCI:5:0:0";
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-    };
-  };
+  hardware.bluetooth.enable = true;
 
   fonts.packages = with pkgs; [
-    cantarell-fonts
     source-serif-pro
     nerd-fonts.jetbrains-mono
     nerd-fonts.iosevka-term
-    noto-fonts
-    stix-two
-    lmodern
   ];
+
   fonts.fontconfig = {
     enable = true;
     defaultFonts.monospace = ["JetBrainsMono NF"];
@@ -101,320 +40,127 @@
     defaultFonts.sansSerif = ["IosevkaTerm Nerd Font"];
   };
 
-  networking.hostName = "thoughtbox";
-  networking.networkmanager.enable = true;
-
-  # DC: America/New_York, RACINE: America/Chicago
-  time.timeZone = "America/New_York";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {LC_TIME = "en_US.UTF-8";};
-
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024;
-    }
-  ];
-
-  programs.dconf.enable = true;
-  programs.niri.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    config.common.default = "gtk";
-  };
-
-  environment.sessionVariables = {
-    TERMINAL = "kitty";
-    NIXOS_OZONE_WL = "1";
-    CHROME_EXECUTABLE = "google-chrome-stable";
-    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d";
-    # fixing swing popups
-    _JAVA_AWT_WM_NONREPARENTING = 1;
-    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true";
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-
-  programs.java = {
-    package = pkgs.jdk25;
-    enable = true;
-  };
-
-  programs.fish.enable = true;
-
-  programs.firefox.enable = true;
-  programs.adb.enable = true;
-  services.printing.enable = true;
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  services.pipewire.extraConfig.pipewire."92-media-consumption" = {
-    "context.properties" = {
-      "default.clock.rate" = 48000;
-      "default.clock.quantum" = 1024;
-      "default.clock.min-quantum" = 512;
-      "default.clock.max-quantum" = 2048;
-    };
-  };
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
-  services.blueman.enable = true;
-
-  location = {
-    latitude = 40.4270836;
-    longitude = -86.919464;
-    provider = "manual";
-  };
-
+  services.xserver.enable = true;
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd}/bin/agreety --cmd \"niri-session\"";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
+        user = "bucheye";
       };
     };
   };
+  nix.settings.experimental-features = "nix-command flakes";
+  documentation.man.generateCaches = false;
 
-  virtualisation.libvirtd = {
+  services.qbittorrent.enable = true;
+  services.openssh.enable = true;
+  services.xserver.xkb.layout = "us";
+  services.xserver.xkb.options = "caps:escape";
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
+  services.printing.enable = true;
+  services.blueman.enable = true;
+
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];
+
+  services.pipewire = {
     enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      swtpm.enable = true;
-    };
+    pulse.enable = true;
   };
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bucheye = {
+    shell = pkgs.fish;
     isNormalUser = true;
-    description = "Bucheye";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout" "kvm" "adbusers"];
+    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      redshift
-      clang-tools
-      nsnake
-      kitty
       helix
-      hyprpicker
-      hyprpaper
-      hypridle
-      fuzzel
-      trashy
-      alejandra
       nixd
+      tmux
+      gh
+      acpi
+      clang-tools
+      clang-analyzer
+      coreutils-full
+      gcc
+      gnumake
+      perlcritic
+      xwayland-satellite
+      kitty
+      fuzzel
+      stow
       starship
-      ffmpeg
-      # why do I have this installed on my user system?
-      poppler
+      eza
+      hyprpaper
+      waybar
+      hyprlock
+      hypridle
+      nautilus
+      qbittorrent
+      brightnessctl
+      parted
+      usbutils
+      xxd
+      gnome-font-viewer
+      binsider
+      obsidian
+      nitch
       fd
       ripgrep
-      resvg
-      google-chrome
-      nitch
-      brightnessctl
-      rustup
-      acpi
-      gcc
-      m4
-      gnumake
-      eza
-      calibre
-      pavucontrol
-      qbittorrent
-      vlc
-      hyprlock
-      font-manager
-      meson
-      mesonlsp
-      ninja
-      gpu-screen-recorder
-      cmake
-      stow
-      btop
-      fastfetch
-      vesktop
-      lazygit
-      github-cli
-      hyprshot
-      zig
-      zls
-      foliate
-      tokei
-      cmake-format
-      cmake-lint
-      cmake-language-server
-      qtcreator
-      anki
-      libreoffice
-      glib
-      usbutils
-      gparted
-      coreutils-full
-      google-cloud-sdk
-      nautilus
-      gsettings-desktop-schemas
-      gsettings-qt
-      dconf-editor
-      zip
-      unzip
-      obsidian
-      usbimager
-      typst
-      tinymist
-      halloy
-      hyprpanel
-      fractal
-      gnome-keyring
-      nzbget
       thunderbird
-      screen
-      minicom
-      vscode-fhs
-      zed-editor
-      nodejs
-      powertop
-      waybar
-      killall
+      mailutils
       dunst
-      mullvad
-      mullvad-vpn
-      dig
-      amfora
-      evince
-      jdt-language-server
-      maven
-      gnome-solanum
-      jetbrains.idea-community
+      wayland-utils
+      gpu-screen-recorder
+      vesktop
+      btop
+      wireplumber
+      pavucontrol
+      rustup
+      php
+      laravel
       bash-language-server
-      shellcheck
-      jj
-      cpufetch
-      binsider
-      kalker
-      libreoffice-fresh
-      typstyle
-      ty
-      ruff
-      uv
-      devenv
-      thonny
-      jupyter
-      conda
-      pandoc
-      zathura
-      slack
-      kdePackages.ghostwriter
-      kdePackages.ksystemlog
-      tombi
-      jujutsu
+      alejandra
       swayimg
-      nix-tree
-      capitaine-cursors
-      baobab
-      efibooteditor
-      nixfmt
-      nix-search-cli
-      cpufrequtils
-      bibtex-tidy
-      texlab
-      typora
-      android-studio
-      virt-manager
-      flutter
-      # android-tools
-      mesa-demos
-      jdk21
-      vulkan-tools
-
-      (texliveMedium.withPackages (
-        ps:
-          with ps; [
-            enumitem
-          ]
-      ))
-      sox
-      git-filter-repo
-      marksman
-      gource
-      lutris
-      alsa-utils
-      (pkgs.writeShellScriptBin "prismlauncher" ''
-        unset QT_STYLE_OVERRIDE
-        unset QT_QPA_PLATFORMTHEME
-        exec ${pkgs.prismlauncher}/bin/prismlauncher "$@"
-      '')
-      xwayland-satellite
-      webtorrent_desktop
-      kodi
-      loupe
-      foot
     ];
-    shell = pkgs.fish;
+  };
+
+  programs.niri.enable = true;
+  programs.fish.enable = true;
+  programs.firefox.enable = true;
+
+  environment.variables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
+    TERMINAL = "kitty";
+    GDK_BACKEND = "wayland";
+  };
+
+  environment.systemPackages = with pkgs; [
+    wineWow64Packages.stable
+    winetricks
+    vim
+    wget
+    git
+  ];
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [38626];
+    allowedUDPPorts = [38626];
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  # services.power-profiles-daemon.enable = true;
-  powerManagement.enable = true;
+  nix.optimise.automatic = true;
+  nix.optimise.dates = ["03:45"];
 
-  services.tlp.enable = true;
-  services.auto-cpufreq.enable = true;
-  services.upower.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  services.mullvad-vpn.enable = true;
-  services.syncthing.enable = true;
-
-  services.gvfs.enable = true;
-  services.kanata = {
-    enable = true;
-    keyboards = {
-      "logi".config = ''
-        (defsrc
-          caps
-        )
-
-        (deflayer superior
-          esc
-        )
-      '';
-    };
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
-  documentation.man.generateCaches = false;
-
-  services.tor.enable = true;
-  services.gpsd.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    neovim
-    wget
-    git
-    man-pages
-    man-pages-posix
-    wl-clipboard
-    sbctl
-    efivar
-    efibootmgr
-    pulseaudio
-  ];
-  nix.settings.experimental-features = ["nix-command" "flakes"];
-  nix.settings.trusted-users = ["bucheye"];
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }
