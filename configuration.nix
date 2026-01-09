@@ -72,9 +72,6 @@
   };
 
   users.users.bucheye = {
-    isNormalUser = true;
-    description = "Bucheye";
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout" "kvm" "adbusers"];
     packages = with pkgs; [
       cpufrequtils
       bibtex-tidy
