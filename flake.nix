@@ -9,6 +9,7 @@
   }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       modules = [
+        ./common.nix
         ./configuration.nix
       ];
     };
