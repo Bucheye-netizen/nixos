@@ -2,10 +2,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
-  outputs = inputs@{ self, nixpkgs, ... }: {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      modules = [ ./configuration.nix ];
+      modules = [
+        ./configuration.nix
+      ];
     };
   };
 }
-
