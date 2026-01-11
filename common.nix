@@ -171,6 +171,13 @@
       efibooteditor
       perlnavigator
       trashy
+      (texliveMedium.withPackages (
+        ps:
+          with ps; [
+            enumitem
+          ]
+      ))
+      pandoc
     ];
   };
 
