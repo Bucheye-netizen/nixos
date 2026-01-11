@@ -14,9 +14,8 @@
 
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Europe/Amsterdam";
-
-  # DC: America/New_York, RACINE: America/Chicago
+  # DC: America/New_York, RACINE: America/Chicago, ET: Europe/Amsterdam
+  time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
   hardware.bluetooth.enable = true;
@@ -170,6 +169,8 @@
       nix-tree
       baobab
       efibooteditor
+      perlnavigator
+      trashy
     ];
   };
 
