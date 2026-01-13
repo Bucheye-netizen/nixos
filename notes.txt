@@ -1,0 +1,7 @@
+Use the following to get swing apps running properly:
+
+~~~sh
+export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.aatext=true -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -Dawt.toolkit.name=WLToolkit'
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+~~~

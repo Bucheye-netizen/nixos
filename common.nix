@@ -83,7 +83,11 @@
   services.printing.enable = true;
   services.blueman.enable = true;
 
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-gnome
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal
+  ];
 
   services.pipewire = {
     alsa.enable = true;
@@ -95,7 +99,17 @@
   users.users.bucheye = {
     shell = pkgs.fish;
     isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel" "input" "uinput" "audio" "dialout" "kvm" "adbusers"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "uinput"
+      "audio"
+      "dialout"
+      "kvm"
+      "adbusers"
+      "fuse"
+    ];
     packages = with pkgs; [
       helix
       nixd
@@ -163,7 +177,6 @@
       shellcheck
       cpufetch
       ruff
-      uv
       zathura
       tombi
       nix-tree
@@ -171,6 +184,7 @@
       efibooteditor
       perlnavigator
       trashy
+      hyprpicker
       (texliveMedium.withPackages (
         ps:
           with ps; [
@@ -178,13 +192,23 @@
           ]
       ))
       pandoc
+      unixtools.netstat
+      netcat
+      sshfs
+      fuse
+      kdePackages.dolphin
     ];
   };
 
+  programs.java.enable = true;
+  programs.kdeconnect = {
+    enable = true;
+  };
   programs.dconf.enable = true;
   programs.niri.enable = true;
   programs.fish.enable = true;
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   environment.variables = {
     EDITOR = "hx";
@@ -200,6 +224,7 @@
     man-pages
     man-pages-posix
     wl-clipboard
+    uv
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -212,4 +237,6 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  environment.localBinInPath = true;
 }
