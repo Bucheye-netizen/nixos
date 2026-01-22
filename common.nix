@@ -59,7 +59,6 @@
   services.gnome.gnome-keyring.enable = true;
   security.polkit.enable = true;
   security.rtkit.enable = true;
-  services.tlp.enable = true;
   services.auto-cpufreq.enable = true;
 
   powerManagement.enable = true;
@@ -197,6 +196,14 @@
       sshfs
       fuse
       kdePackages.dolphin
+      gdb
+      lazygit
+      steam
+      ffmpeg
+      jq
+      exiftool
+      fish-lsp
+      google-cloud-sdk
     ];
   };
 
