@@ -27,6 +27,7 @@
     lmodern
     nerd-fonts.jetbrains-mono
     nerd-fonts.iosevka-term
+    times-newer-roman
   ];
 
   fonts.fontconfig = {
@@ -108,6 +109,7 @@
       "kvm"
       "adbusers"
       "fuse"
+      "disks"
     ];
     packages = with pkgs; [
       helix
@@ -204,6 +206,12 @@
       exiftool
       fish-lsp
       google-cloud-sdk
+      gnome-disk-utility
+      abiword
+      libreoffice
+      pomodoro-gtk
+      clang
+      clang-manpages
     ];
   };
 
