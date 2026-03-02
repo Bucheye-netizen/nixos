@@ -61,6 +61,7 @@
   security.polkit.enable = true;
   security.rtkit.enable = true;
   services.auto-cpufreq.enable = true;
+  services.mullvad-vpn.enable = true;
 
   powerManagement.enable = true;
 
@@ -82,6 +83,7 @@
 
   services.printing.enable = true;
   services.blueman.enable = true;
+  services.gvfs.enable = true;
 
   xdg.portal.extraPortals = with pkgs; [
     xdg-desktop-portal-gnome
@@ -212,6 +214,11 @@
       pomodoro-gtk
       clang
       clang-manpages
+      lldb
+      mullvad-vpn
+      fastfetch
+      newsflash
+      foot
     ];
   };
 
