@@ -1,1 +1,1 @@
-sudo nixos-rebuild switch --flake ~/nixos/flake.nix
+sudo nixos-rebuild switch --flake ~/nixos#"$1"
