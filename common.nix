@@ -219,6 +219,10 @@
       fastfetch
       newsflash
       foot
+      valgrind
+      rclone
+      rclone-browser
+      readest
     ];
   };
 
