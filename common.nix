@@ -40,6 +40,8 @@
   services.xserver.enable = true;
   qt.enable = true;
 
+  services.hypridle.enable = true;
+
   services.greetd = {
     enable = true;
     settings = {
@@ -223,6 +225,9 @@
       rclone
       rclone-browser
       readest
+      zed-editor
+      tcl
+      feh
     ];
   };
 
