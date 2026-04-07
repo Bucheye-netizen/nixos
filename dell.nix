@@ -7,5 +7,18 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./cli.nix
+    ./common.nix
+    ./hardware-configuration.nix
+    ./options.nix
+    ./wm.nix
+    ./audio.nix
+    ./apps.nix
+    ./dev.nix
+  ];
+
+  username = "bucheye";
+  networking.hostName = "dell";
   system.stateVersion = "25.11";
 }

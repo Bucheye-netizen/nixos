@@ -9,14 +9,12 @@
   }: {
     nixosConfigurations.dell = nixpkgs.lib.nixosSystem {
       modules = [
-        ./common.nix
         ./dell.nix
       ];
     };
 
     nixosConfigurations.legion = nixpkgs.lib.nixosSystem {
       modules = [
-        ./common.nix
         ./lenovo.nix
       ];
     };
