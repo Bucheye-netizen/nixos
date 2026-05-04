@@ -34,6 +34,8 @@
       hypridle
       hyprpicker
       fuzzel
+      bemoji
+      wtype
     ];
   };
 

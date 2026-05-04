@@ -13,7 +13,7 @@
     libreoffice
     steam
     mullvad-vpn
-    feh
+    sxiv
     rclone-browser
     gnome-disk-utility
     kdePackages.dolphin
@@ -31,6 +31,7 @@
     gpu-screen-recorder
     zathura
     baobab
+    anki
   ];
 
   services.mullvad-vpn.enable = true;

@@ -32,6 +32,9 @@
     lldb
     valgrind
     tcl
+    markdown-oxide
+    ghidra
+    kakoune
   ];
 
   programs.java.enable = true;

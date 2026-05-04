@@ -9,6 +9,7 @@
   users.users.${config.username} = {
     shell = pkgs.fish;
     packages = with pkgs; [
+      tree-sitter
       helix
       starship
       tmux
@@ -52,11 +53,25 @@
       fish-lsp
       fastfetch
       valgrind
+      rclone
+      nh
+      rbw
+
       # attempting to get terminal based email working
       aerc
       w3m
-      nh
-      rclone
+      libsecret
+      oama
+      neovim
+      page
+      luajitPackages.tree-sitter-cli
+      bc
+      chawan
+      spicetify-cli
+
+      khal
+      khard
+      vdirsyncer
     ];
   };
 
@@ -73,5 +88,6 @@
     VISUAL = "hx";
     TERMINAL = "kitty";
     GDK_BACKEND = "wayland";
+    MANPAGER = "nvim +Man!";
   };
 }
