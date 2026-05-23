@@ -32,6 +32,10 @@
     zathura
     baobab
     anki
+    swappy
+    apostrophe
+    kdePackages.ghostwriter
+    gparted
   ];
 
   services.mullvad-vpn.enable = true;
@@ -51,6 +55,15 @@
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
+    };
+  };
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [
+        "kitty.desktop"
+      ];
     };
   };
 }

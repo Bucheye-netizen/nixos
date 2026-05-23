@@ -10,12 +10,13 @@
   imports = [
     ./cli.nix
     ./common.nix
-    ./hardware-configuration.nix
+    ./dell-hardware.nix
     ./options.nix
     ./wm.nix
     ./audio.nix
     ./apps.nix
     ./dev.nix
+    ./services.nix
   ];
 
   username = "bucheye";

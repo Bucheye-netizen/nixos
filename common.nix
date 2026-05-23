@@ -11,10 +11,17 @@
   networking.networkmanager.enable = true;
 
   # DC: America/New_York, RACINE: America/Chicago, ET: Europe/Amsterdam
-  time.timeZone = "America/New_York";
+  time.timeZone = "Africa/Addis_Ababa";
   i18n.defaultLocale = "en_US.UTF-8";
 
   hardware.bluetooth.enable = true;
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [fcitx5-m17n];
+    fcitx5.waylandFrontend = true;
+  };
 
   fonts.packages = with pkgs; [
     source-serif-pro
@@ -24,6 +31,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.iosevka-term
     times-newer-roman
+    roboto
   ];
 
   fonts.fontconfig = {
@@ -33,11 +41,12 @@
     defaultFonts.sansSerif = ["IosevkaTerm Nerd Font"];
   };
 
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
   services.xserver.enable = true;
   qt.enable = true;
 
   nix.settings.experimental-features = "nix-command flakes";
-  documentation.man.generateCaches = false;
+  documentation.man.enable = false;
 
   services.openssh.enable = true;
   services.xserver.xkb.layout = "us";

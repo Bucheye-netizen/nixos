@@ -63,7 +63,6 @@
       libsecret
       oama
       neovim
-      page
       luajitPackages.tree-sitter-cli
       bc
       chawan
@@ -72,6 +71,9 @@
       khal
       khard
       vdirsyncer
+
+      dtach
+      shpool
     ];
   };
 
