@@ -13,7 +13,7 @@
       ];
     };
 
-    nixosConfigurations.legion = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.lenovo = nixpkgs.lib.nixosSystem {
       modules = [
         ./lenovo.nix
       ];
