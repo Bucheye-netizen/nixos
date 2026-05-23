@@ -5,7 +5,10 @@
   lib,
   ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./lenovo-hardware.nix
+    ./cli.nix
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
@@ -94,4 +97,7 @@
     ];
     shell = pkgs.fish;
   };
+
+  username = "bucheye";
+  networking.hostName = "lenovo";
 }
