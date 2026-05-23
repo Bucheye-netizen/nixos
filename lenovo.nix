@@ -8,6 +8,7 @@
   imports = [
     ./lenovo-hardware.nix
     ./cli.nix
+    ./common.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
