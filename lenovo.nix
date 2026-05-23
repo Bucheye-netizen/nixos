@@ -8,6 +8,7 @@
   imports = [
     ./lenovo-hardware.nix
     ./cli.nix
+    ./options.nix
     ./common.nix
   ];
 
@@ -57,4 +58,5 @@
 
   username = "bucheye";
   networking.hostName = "lenovo";
+  system.stateVersion = "25.11";
 }
