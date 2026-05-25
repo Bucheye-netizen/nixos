@@ -10,6 +10,9 @@
     ./cli.nix
     ./options.nix
     ./common.nix
+    ./dev.nix
+    ./apps.nix
+    ./wm.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -46,6 +49,10 @@
       };
     };
   };
+
+  users.users.${config.username}.packages = with pkgs; [
+    prismlauncher
+  ];
 
   services.pipewire.extraConfig.pipewire."92-media-consumption" = {
     "context.properties" = {

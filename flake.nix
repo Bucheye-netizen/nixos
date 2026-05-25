@@ -18,5 +18,11 @@
         ./lenovo.nix
       ];
     };
+
+    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      moduels = [
+        ./server.nix
+      ];
+    };
   };
 }

@@ -33,9 +33,11 @@
     baobab
     anki
     swappy
-    apostrophe
     kdePackages.ghostwriter
     gparted
+    seahorse
+    timewarrior
+    taskwarrior2
   ];
 
   services.mullvad-vpn.enable = true;
