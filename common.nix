@@ -19,7 +19,13 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = with pkgs; [fcitx5-m17n];
+    fcitx5.addons = with pkgs; [
+      fcitx5-m17n
+      fcitx5-table-other
+      fcitx5-table-extra
+      qt6Packages.fcitx5-chinese-addons # provides the table engine
+      fcitx5-gtk
+    ];
     fcitx5.waylandFrontend = true;
   };
 
@@ -45,8 +51,7 @@
   services.xserver.enable = true;
   qt.enable = true;
 
-  nix.settings.experimental-features = "nix-command flakes";
-  documentation.man.enable = false;
+  # documentation.man.enable = true;
 
   services.openssh.enable = true;
   services.xserver.xkb.layout = "us";
@@ -93,6 +98,13 @@
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
+  };
+
+  nix.settings = {
+    max-jobs = "auto";
+    http-connections = 32; # connections per substituter
+    max-substitution-jobs = 32; # parallel substitution fetches (Nix 2.16+)
+    experimental-features = "nix-command flakes";
   };
 
   environment.localBinInPath = true;

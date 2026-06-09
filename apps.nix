@@ -6,12 +6,12 @@
 }: {
   programs.firefox.enable = true;
   programs.kdeconnect.enable = true;
+  programs.steam.enable = true;
 
   users.users.${config.username}.packages = with pkgs; [
     obsidian
     pomodoro-gtk
     libreoffice
-    steam
     mullvad-vpn
     sxiv
     rclone-browser

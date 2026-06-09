@@ -13,6 +13,7 @@
     ./dev.nix
     ./apps.nix
     ./wm.nix
+    ./audio.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -52,6 +53,8 @@
 
   users.users.${config.username}.packages = with pkgs; [
     prismlauncher
+    lutris
+    wineWow64Packages.stable
   ];
 
   services.pipewire.extraConfig.pipewire."92-media-consumption" = {
