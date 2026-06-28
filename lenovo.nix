@@ -55,6 +55,7 @@
     prismlauncher
     lutris
     wineWow64Packages.stable
+    winetricks
   ];
 
   services.pipewire.extraConfig.pipewire."92-media-consumption" = {

@@ -8,6 +8,8 @@
   programs.kdeconnect.enable = true;
   programs.steam.enable = true;
 
+  services.expressvpn.enable = true;
+
   users.users.${config.username}.packages = with pkgs; [
     obsidian
     pomodoro-gtk
@@ -38,6 +40,8 @@
     seahorse
     timewarrior
     taskwarrior2
+    gnome-text-editor
+    expressvpn
   ];
 
   services.mullvad-vpn.enable = true;

@@ -10,8 +10,8 @@
 
   networking.networkmanager.enable = true;
 
-  # DC: America/New_York, RACINE: America/Chicago, ET: Europe/Amsterdam
-  time.timeZone = "Africa/Addis_Ababa";
+  # DC: America/New_York, RACINE: America/Chicago, ET: Africa/Addis_Ababa
+  time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
 
   hardware.bluetooth.enable = true;
