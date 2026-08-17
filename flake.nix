@@ -19,9 +19,9 @@
       ];
     };
 
-    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
-      moduels = [
-        ./server.nix
+    nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
+      modules = [
+        ./pc.nix
       ];
     };
   };
