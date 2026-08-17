@@ -9,6 +9,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
 
   # DC: America/New_York, RACINE: America/Chicago, ET: Africa/Addis_Ababa
   time.timeZone = "America/Chicago";
@@ -38,6 +39,8 @@
     nerd-fonts.iosevka-term
     times-newer-roman
     roboto
+    alegreya
+    courier-prime
   ];
 
   fonts.fontconfig = {

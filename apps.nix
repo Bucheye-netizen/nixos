@@ -7,6 +7,7 @@
   programs.firefox.enable = true;
   programs.kdeconnect.enable = true;
   programs.steam.enable = true;
+  programs.gpu-screen-recorder.enable = true;
 
   services.expressvpn.enable = true;
 
@@ -14,7 +15,6 @@
     obsidian
     pomodoro-gtk
     libreoffice
-    mullvad-vpn
     sxiv
     rclone-browser
     gnome-disk-utility
@@ -30,7 +30,6 @@
     fractal
     gnome-keyring
     efibooteditor
-    gpu-screen-recorder
     zathura
     baobab
     anki

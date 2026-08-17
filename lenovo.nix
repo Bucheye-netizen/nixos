@@ -16,9 +16,17 @@
     ./audio.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      vulkan-loader
+      vulkan-validation-layers
+      nvidia-vaapi-driver
+    ];
+  };
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
-  boot.kernelModules = [];
   boot.extraModprobeConfig = ''
     options snd-hda-intel power_save=0
     options snd-hda-intel model=auto
@@ -35,7 +43,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = false;
+    powerManagement.finegrained = true;
 
     open = false;
     nvidiaSettings = true;
@@ -56,6 +64,9 @@
     lutris
     wineWow64Packages.stable
     winetricks
+    vulkan-tools
+    ethtool
+    lunar-client
   ];
 
   services.pipewire.extraConfig.pipewire."92-media-consumption" = {

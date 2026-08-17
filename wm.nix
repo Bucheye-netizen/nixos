@@ -45,4 +45,6 @@
 
   services.hypridle.enable = true;
   services.dunst.enable = true;
+  programs.waybar.enable = true;
+  programs.waybar.systemd.target = "graphical-session.target";
 }

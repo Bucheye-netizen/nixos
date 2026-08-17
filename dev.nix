@@ -35,6 +35,15 @@
     markdown-oxide
     ghidra
     kakoune
+    zig
+    zls
+    meson
+    doxygen
+    python314Packages.breathe
+    pkg-config
+    gettext
+    cmake
+    girara
   ];
 
   programs.java.enable = true;
