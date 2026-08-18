@@ -9,8 +9,6 @@
   programs.steam.enable = true;
   programs.gpu-screen-recorder.enable = true;
 
-  services.expressvpn.enable = true;
-
   users.users.${config.username}.packages = with pkgs; [
     obsidian
     pomodoro-gtk
@@ -40,7 +38,7 @@
     timewarrior
     taskwarrior2
     gnome-text-editor
-    expressvpn
+    planify
   ];
 
   services.mullvad-vpn.enable = true;
