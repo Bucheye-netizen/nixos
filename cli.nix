@@ -57,23 +57,24 @@
       nh
       rbw
 
-      # attempting to get terminal based email working
-      aerc
-      w3m
+      aerc # email client
       libsecret
       oama
+      harper # lsp spell check for markdown
+
       neovim
       luajitPackages.tree-sitter-cli
       bc
       chawan
       spicetify-cli
 
+      # calendar apps
       khal
       khard
       vdirsyncer
 
-      dtach
-      shpool
+      # for nvim markdown preview
+      deno
     ];
   };
 

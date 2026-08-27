@@ -39,11 +39,13 @@
     taskwarrior2
     gnome-text-editor
     planify
+    kdePackages.gwenview
   ];
 
   services.mullvad-vpn.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.qbittorrent.enable = true;
+  services.fwupd.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {

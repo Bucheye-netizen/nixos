@@ -12,7 +12,7 @@
   networking.networkmanager.wifi.powersave = false;
 
   # DC: America/New_York, RACINE: America/Chicago, ET: Africa/Addis_Ababa
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
 
   hardware.bluetooth.enable = true;

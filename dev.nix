@@ -44,6 +44,8 @@
     gettext
     cmake
     girara
+    rstudioWrapper
+    R
   ];
 
   programs.java.enable = true;

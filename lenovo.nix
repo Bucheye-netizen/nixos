@@ -24,12 +24,23 @@
       vulkan-validation-layers
       nvidia-vaapi-driver
     ];
+    # todo remove
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      vulkan-loader
+    ];
   };
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelParams = ["nvidia-drm.fbdev=1" "usbcore.autosuspend=-1"];
+  boot.kernelParams = [
+    "nvidia-drm.fbdev=1"
+    # "usbcore.autosuspend=-1"
+    "pcie_aspm=force"
+  ];
   boot.extraModprobeConfig = ''
-    options snd-hda-intel power_save=0
-    options snd-hda-intel model=auto
+      # options snd-hda-intel power_save=1
+      # options snd-hda-intel model=auto
+
+    "options snd-hda-intel power_save=1 power_save_controller=Y"
+    "options snd-hda-intel model=auto"
   '';
 
   hardware.enableAllFirmware = true;
@@ -61,10 +72,16 @@
 
   users.users.${config.username}.packages = with pkgs; [
     prismlauncher
-    lutris
+    (lutris.override {
+      extraPkgs = pkgs: [
+        pkgs.vulkan-loader
+        pkgs.nvidia-vaapi-driver
+      ];
+    })
     wineWow64Packages.stable
     winetricks
     vulkan-tools
+    mesa
     ethtool
     lunar-client
   ];
