@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./services.nix
     ./lenovo-hardware.nix
     ./cli.nix
     ./options.nix

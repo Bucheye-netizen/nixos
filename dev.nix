@@ -45,7 +45,15 @@
     cmake
     girara
     rstudioWrapper
-    R
+    (rWrapper.override
+      {
+        packages = with rPackages; [
+          tidyverse
+          ggplot2
+          lobstr
+          rvest
+        ];
+      })
   ];
 
   programs.java.enable = true;

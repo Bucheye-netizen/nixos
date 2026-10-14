@@ -8,6 +8,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  networking.firewall.allowedTCPPorts = [2234];
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
 
@@ -107,7 +108,7 @@
     max-jobs = "auto";
     http-connections = 32; # connections per substituter
     max-substitution-jobs = 32; # parallel substitution fetches (Nix 2.16+)
-    experimental-features = "nix-command flakes";
+    experimental-features = ["nix-command flakes"];
   };
 
   environment.localBinInPath = true;

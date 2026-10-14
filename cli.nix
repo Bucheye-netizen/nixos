@@ -67,14 +67,15 @@
       bc
       chawan
       spicetify-cli
-
       # calendar apps
       khal
       khard
       vdirsyncer
-
       # for nvim markdown preview
       deno
+      claude-code
+      bitwarden-cli
+      keyutils
     ];
   };
 

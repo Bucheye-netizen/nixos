@@ -40,6 +40,17 @@
     gnome-text-editor
     planify
     kdePackages.gwenview
+    gram
+    google-chrome
+    bisq2
+    isync
+    notmuch
+    goimapnotify
+    veloren
+    feishin
+    nicotine-plus
+    kid3
+    lidarr
   ];
 
   services.mullvad-vpn.enable = true;
