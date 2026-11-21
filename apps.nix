@@ -48,9 +48,8 @@
     goimapnotify
     veloren
     feishin
-    nicotine-plus
-    kid3
-    lidarr
+    claws-mail
+    lagrange
   ];
 
   services.mullvad-vpn.enable = true;

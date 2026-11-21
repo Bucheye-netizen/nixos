@@ -54,6 +54,7 @@
           rvest
         ];
       })
+    racket
   ];
 
   programs.java.enable = true;

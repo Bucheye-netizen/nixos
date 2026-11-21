@@ -76,6 +76,9 @@
       claude-code
       bitwarden-cli
       keyutils
+      alot
+      msmtp
+      gladtex
     ];
   };
 
